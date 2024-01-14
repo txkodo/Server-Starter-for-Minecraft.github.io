@@ -74,6 +74,8 @@ jobs:
           title: Build & Deploy
           description: |
             Page: [${{ needs.deploy.outputs.page_url }}](${{ needs.deploy.outputs.page_url }})
+            Version `1.2.3-alpha`
+            Click [here](https://github.com/sarisia/actions-status-discord) to download!
           url: "${{ needs.deploy.outputs.page_url }}"
           nocontext: true
           username: GitHub Actions
