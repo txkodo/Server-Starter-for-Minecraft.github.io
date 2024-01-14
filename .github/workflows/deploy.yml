@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup NodeJS Environment 18
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'yarn'
@@ -59,6 +59,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
 
   notify:
     runs-on: ubuntu-latest
@@ -71,8 +73,8 @@ jobs:
         with:
           title: Build & Deploy
           description: |
-            Page: [${{ steps.deployment.outputs.page_url }}](${{ steps.deployment.outputs.page_url }})
-          url: "${{ steps.deployment.outputs.page_url }}"
+            Page: [${{ needs.deploy.outputs.page_url }}](${{ needs.deploy.outputs.page_url }})
+          url: "${{ needs.deploy.outputs.page_url }}"
           nocontext: true
           username: GitHub Actions
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
