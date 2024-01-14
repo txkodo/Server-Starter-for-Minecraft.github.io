@@ -69,5 +69,10 @@ jobs:
       - name: notify discord
         uses: sarisia/actions-status-discord@v1
         with:
+          title: Build & Deploy
+          description: "Build and deploy to GitHub Pages"
+          url: "${{ steps.deployment.outputs.page_url }}"
+          nocontext: true
+          username: GitHub Actions
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ env.WORKFLOW_CONCLUSION }}
